@@ -35,7 +35,7 @@ public class ProdutosDAO {
             JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "ERRO: Não foi possível cadastrar produto!");
-        }
+        } 
     }
     
     public ArrayList<ProdutosDTO> listarProdutos(){
@@ -65,7 +65,19 @@ public class ProdutosDAO {
         return listagem;
     }
     
-    
+    public void venderProduto(int id) {
+        conn = new conectaDAO().connectDB();
+        String sql = "update produtos set status = ? where id = ?";
+        try {
+            prep = conn.prepareStatement(sql);
+            prep.setString(1, "Vendido");
+            prep.setInt(2, id);
+            prep.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Produto vendido!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERRO: Não foi possível vender o produto");
+        }
+    }
     
         
 }
